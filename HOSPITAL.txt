@@ -1,0 +1,169 @@
+HOSPITAL
+
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+class hospital
+{
+
+	class patient
+	{
+    public:
+		string name;
+		int priotity;
+	};
+	public:
+	    patient a[10];
+        int front=-1;
+        int rear=-1;
+        void pd();
+
+        void add_patient();
+        void bubble(patient a[]);
+        void display();
+        void delet();
+
+
+};
+
+void hospital::pd()
+ {
+     cout<<""<<endl;
+     cout<<"Seriousness level"<<endl;
+     cout<<"1:Serious Patients"<<endl;
+     cout<<"2:Non Serious patients"<<endl;
+     cout<<"3:General Checkup"<<endl;
+
+ }
+
+ void hospital::add_patient()
+ {
+     if(front==-1)
+     {
+         patient p;
+         front++;
+         rear++;
+         pd();
+         cout<<""<<endl;
+         cout<<"Enter patient name:"<<endl;
+         cin>>p.name;
+         cout<<"Enter patient priotity:"<<endl;
+         cin>>p.priotity;
+         a[front]=p;
+
+     }
+     else if(rear==9)
+     {
+
+          cout<<"Hospital full!"<<endl;
+     }
+     else
+     {
+         patient p;
+         rear++;
+         pd();
+         cout<<""<<endl;
+         cout<<"Enter patient name:"<<endl;
+         cin>>p.name;
+         cout<<"Enter patient priotity:"<<endl;
+         cin>>p.priotity;
+         a[rear]=p;
+         bubble(a);
+     }
+
+ }
+
+void hospital::bubble(patient a[])
+{
+
+    for(int j=front;j<rear+1;j++)
+    {
+        for(int i=front;i<rear;i++)
+        {
+
+            if(a[i].priotity>a[i+1].priotity)
+            {
+
+                patient temp=a[i];
+                a[i]=a[i+1];
+                a[i+1]=temp;
+            }
+        }
+    }
+
+}
+
+void hospital::display()
+{
+    if(front==-1)
+     {
+        cout<<"NO patient in hospital!"<<endl;
+     }
+    else
+    {
+        cout<<"Patient names:"<<endl;
+        for(int i=front;i<rear+1;i++)
+        {
+             cout<<a[i].priotity;
+             cout<<":"<<a[i].name<<endl;
+        }
+    }
+}
+
+void hospital::delet()
+{
+    if(front==-1)
+     {
+        cout<<"NO patient in hospital!"<<endl;
+     }
+     else
+     {
+         cout<<"Patient "<<a[front].name<<" removed:"<<endl;
+         front++;
+
+     }
+
+}
+
+int main()
+{
+	    cout<<""<<endl;
+	    cout<<"----Welcome to Wagh clinic---"<<endl;
+
+
+		hospital h;
+		int j=-1;
+		do
+		{
+		    cout<<""<<endl;
+            cout<<"1:Add patient"<<endl;
+            cout<<"2:Remove patient"<<endl;
+            cout<<"3:Display list"<<endl;
+            cout<<"4:Exit"<<endl;
+
+		    int i;
+			cin>>i;
+
+			if(i==1)
+			{
+				h.add_patient();
+			}
+			if(i==2)
+			{
+				h.delet();
+			}
+			if(i==3)
+			{
+				h.display();
+			}
+			if(i==4)
+			{
+				j=i;
+			}
+		}
+		while(j==-1);
+}
+
+
